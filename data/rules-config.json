@@ -1,0 +1,33 @@
+{
+  "pageInfo": {
+    "title": "กฎ",
+    "pageTitle": "กฎ | Fam Unity",
+    "heroTitle": "กฎ",
+    "heroSubtitle": "Rules - Fam Unity",
+    "heroDescription": "กฎและข้อกำหนดของ Fam Unity เพื่อประสบการณ์เล่นเกมที่ดี"
+  },
+  "contactInfo": {
+    "title": "ต้องการความช่วยเหลือ?",
+    "description": "หากมีข้อสงสัยเกี่ยวกับกฎ สามารถติดต่อได้",
+    "contactText": "ติดต่อเรา"
+  },
+  "ruleFiles": [
+    "new-player-rules.json",
+    "roleplay-rules.json",
+    "stream-snipe-rules.json",
+    "server-country-rules.json",
+    "twitter-rules.json",
+    "robbery-rules.json",
+    "summon-evidence-rules.json",
+    "evidence-submission-rules.json",
+    "kidnapping-rules.json",
+    "airdrop-rules.json",
+    "shop-robbery-activity-rules.json",
+    "family-gang-shop-robbery-rules.json",
+    "gang-auction-car-rules.json",
+    "family-auction-car-rules.json",
+    "license-revocation-rules.json"
+  ],
+  "enableVisibilityControl": true,
+  "visibilityConfigFile": "rules-visibility-config.json"
+}

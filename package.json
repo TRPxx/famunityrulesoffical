@@ -1,0 +1,69 @@
+{
+  "name": "fam-unity-rules",
+  "version": "1.0.0",
+  "description": "Fam Unity Server Rules - Standalone Project (Rules Only)",
+  "main": "index.html",
+  "type": "static",
+  "scripts": {
+    "start": "start index.html",
+    "serve": "npx http-server -p 3000 -o",
+    "open": "start start.html"
+  },
+  "keywords": [
+    "fam-unity",
+    "rules", 
+    "server-rules",
+    "static-website",
+    "standalone"
+  ],
+  "author": "Fam Unity Team",
+  "license": "Private",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "repository": {
+    "type": "local",
+    "url": "file:///e:/MyCode/FamUnity-Rules"
+  },
+  "homepage": "index.html",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "files": [
+    "index.html",
+    "start.html", 
+    "styles/",
+    "scripts/",
+    "data/",
+    "assets/",
+    "README.md"
+  ],
+  "config": {
+    "port": 3000,
+    "host": "localhost"
+  },
+  "dependencies": {},
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "metadata": {
+    "created": "2025-06-22",
+    "purpose": "Standalone rules display system",
+    "features": [
+      "Rules display",
+      "Search functionality", 
+      "Responsive design",
+      "No backend required"
+    ],
+    "excluded": [
+      "Admin panel",
+      "Database",
+      "User management",
+      "News system"
+    ]
+  }
+}

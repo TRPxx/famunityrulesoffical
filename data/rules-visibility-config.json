@@ -1,0 +1,158 @@
+{
+  "rulesVisibility": {
+    "new-player-rules": {
+      "enabled": true,
+      "title": "กฎผู้เล่นใหม่",
+      "category": "basic",
+      "order": 1,
+      "description": "กฎและข้อแนะนำสำหรับผู้เล่นใหม่"
+    },
+    "roleplay-rules": {
+      "enabled": true,
+      "title": "กฎเล่นบทบาท",
+      "category": "basic",
+      "order": 2,
+      "description": "กฎการเล่นบทบาทในเซิร์ฟเวอร์"
+    },
+    "server-country-rules": {
+      "enabled": true,
+      "title": "กฎข้อบังคับเซิร์ฟเวอร์",
+      "category": "basic",
+      "order": 3,
+      "description": "กฎและข้อบังคับประจำเซิร์ฟเวอร์"
+    },
+    "stream-snipe-rules": {
+      "enabled": true,
+      "title": "กฎ Stream Snipe",
+      "category": "safety",
+      "order": 4,
+      "description": "กฎเกี่ยวกับการ Stream Snipe"
+    },
+    "summon-evidence-rules": {
+      "enabled": true,
+      "title": "กฎหมายเรียกและการแจ้งหลักฐาน",
+      "category": "safety",
+      "order": 5,
+      "description": "กฎการเรียกหลักฐานและการแจ้งข้อมูล"
+    },
+    "evidence-submission-rules": {
+      "enabled": true,
+      "title": "การส่งหลักฐาน",
+      "category": "safety",
+      "order": 6,
+      "description": "วิธีการและกฎการส่งหลักฐาน"
+    },    "twitter-rules": {
+      "enabled": true,
+      "title": "กฎการใช้งาน Twitter",
+      "category": "safety",
+      "order": 7,
+      "description": "กฎการใช้งาน Social Media"
+    },
+    "robbery-rules": {
+      "enabled": false,
+      "title": "กฎการปล้น",
+      "category": "action",
+      "order": 8,
+      "description": "กฎและข้อกำหนดการปล้น"
+    },
+    "kidnapping-rules": {
+      "enabled": true,
+      "title": "กฎการลักพาตัว",
+      "category": "action",
+      "order": 9,
+      "description": "กฎการอุ้มและลักพาตัว"
+    },
+    "airdrop-rules": {
+      "enabled": true,
+      "title": "กฏ Airdrop",
+      "category": "activity",
+      "order": 10,
+      "description": "กฎและข้อกำหนดกิจกรรม Airdrop"
+    },
+    "shop-robbery-activity-rules": {
+      "enabled": true,
+      "title": "กฎกิจกรรมงัดร้าน (ประชาชน)",
+      "category": "activity",
+      "order": 11,
+      "description": "กฎกิจกรรมงัดร้านสำหรับประชาชน"
+    },
+    "family-gang-shop-robbery-rules": {
+      "enabled": true,
+      "title": "กฎกิจกรรมงัดร้าน (ครอบครัวและแก๊ง)",
+      "category": "activity",
+      "order": 12,
+      "description": "กฎกิจกรรมงัดร้านสำหรับครอบครัวและแก๊ง"
+    },
+    "gang-auction-car-rules": {
+      "enabled": true,
+      "title": "กฎการถือรถประมูลสำหรับแก๊ง",
+      "category": "property",
+      "order": 13,
+      "description": "กฎการถือครองรถประมูลของแก๊ง"
+    },
+    "family-auction-car-rules": {
+      "enabled": true,
+      "title": "กฎการถือรถประมูลสำหรับครอบครัว",
+      "category": "property",
+      "order": 14,
+      "description": "กฎการถือครองรถประมูลของครอบครัว"
+    },
+    "license-revocation-rules": {
+      "enabled": true,
+      "title": "กำหนดโทษปลดใบ",
+      "category": "penalty",
+      "order": 15,
+      "description": "กำหนดโทษและข้อกำหนดการปลดใบอนุญาต"
+    }
+  },
+  "categories": {
+    "basic": {
+      "name": "กฎพื้นฐาน",
+      "icon": "fas fa-book",
+      "color": "blue",
+      "enabled": true,
+      "order": 1
+    },
+    "safety": {
+      "name": "กฎความปลอดภัย",
+      "icon": "fas fa-shield-alt",
+      "color": "red",
+      "enabled": true,
+      "order": 2
+    },
+    "action": {
+      "name": "กฎการกระทำ",
+      "icon": "fas fa-fist-raised",
+      "color": "orange",
+      "enabled": true,
+      "order": 3
+    },
+    "activity": {
+      "name": "กฎกิจกรรม",
+      "icon": "fas fa-calendar-alt",
+      "color": "green",
+      "enabled": true,
+      "order": 4
+    },
+    "property": {
+      "name": "กฎทรัพย์สิน",
+      "icon": "fas fa-car",
+      "color": "purple",
+      "enabled": true,
+      "order": 5
+    },
+    "penalty": {
+      "name": "กฎโทษ",
+      "icon": "fas fa-balance-scale",
+      "color": "red-600",
+      "enabled": true,
+      "order": 6
+    }
+  },
+  "settings": {
+    "showDisabledInAdmin": true,
+    "hideEmptyCategories": true,
+    "dynamicNavigation": true,
+    "enableVisibilityControl": true
+  }
+}
