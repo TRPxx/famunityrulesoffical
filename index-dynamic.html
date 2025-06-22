@@ -2,71 +2,26 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>กฎ | Fam Unity Rules</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>กฎ | Fam Unity Rules</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Base Styles -->
+    <link href="https://trpxx.github.io/FamUnity-Rules/styles/global.css" rel="stylesheet">
+    <link href="https://trpxx.github.io/FamUnity-Rules/styles/animations.css" rel="stylesheet">
+    <link href="https://trpxx.github.io/FamUnity-Rules/styles/rules.css" rel="stylesheet">
+
     <!-- External Resources -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
-    <style>
-        body { font-family: 'Kanit', 'Inter', sans-serif; }
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem 0.75rem;
-            margin: 0.25rem 0;
-            color: #64748b;
-            text-decoration: none;
-            border-radius: 0.375rem;
-            transition: all 0.2s ease;
-        }
-        .nav-link:hover {
-            background-color: #f8fafc;
-            color: #eab308;
-            transform: translateX(4px);
-        }
-        .category-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem;
-            background-color: #f8fafc;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: 1px solid #e2e8f0;
-        }
-        .category-header:hover {
-            background-color: #f1f5f9;
-        }
-        .category-content {
-            display: none;
-            padding-left: 1rem;
-            margin-top: 0.5rem;
-        }
-        .category-content.expanded {
-            display: block;
-        }
-        .rule-item {
-            background: white;
-            border-radius: 0.5rem;
-            border: 1px solid #e5e7eb;
-            margin-bottom: 1rem;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .rule-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 
 <body class="text-gray-800 bg-gradient-to-br from-yellow-50 via-white to-orange-50">
+    <!-- Particle Background -->
+    <div id="particles-js" class="fixed inset-0 bg-gradient-to-br from-yellow-800/5 via-yellow-50 to-yellow-100 pointer-events-none z-0"></div>
+
     <!-- Top Navbar -->
     <nav class="fixed top-0 right-0 left-0 bg-white/90 backdrop-blur-sm z-40 shadow-md h-16 transition-all duration-300">
         <div class="container mx-auto px-4 h-full flex items-center justify-between">
@@ -125,7 +80,7 @@
                                 <!-- กฎพื้นฐาน -->
                                 <div class="category-group">
                                     <div class="category-header" onclick="toggleCategory('basic-rules')">
-                                        <div class="category-title flex items-center">
+                                        <div class="category-title">
                                             <i class="fas fa-book text-blue-500 mr-2"></i>
                                             <span class="font-semibold text-gray-800">กฎพื้นฐาน</span>
                                         </div>
@@ -150,7 +105,7 @@
                                 <!-- กฎพิเศษ -->
                                 <div class="category-group">
                                     <div class="category-header" onclick="toggleCategory('special-rules')">
-                                        <div class="category-title flex items-center">
+                                        <div class="category-title">
                                             <i class="fas fa-star text-purple-500 mr-2"></i>
                                             <span class="font-semibold text-gray-800">กฎพิเศษ</span>
                                         </div>
@@ -164,11 +119,18 @@
                                     </div>
                                 </div>
                             </nav>
+
+                            <!-- Search Box -->
+                            <div class="mt-6">
+                                <div class="relative">
+                                    <input type="text" id="ruleSearch" placeholder="ค้นหากฎ..." 
+                                           class="w-full px-4 py-2 pl-10 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+                                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </aside>
-
-                <!-- Rules Content -->
+                </aside>                <!-- Rules Content -->
                 <div class="lg:w-3/4">
                     <!-- New Player Rules -->
                     <div id="new-player-rules" class="mb-12">
@@ -181,39 +143,7 @@
                                 <p class="text-green-100 mt-2">กฎและข้อกำหนดสำหรับผู้เข้าใหม่</p>
                             </div>
                             <div id="new-player-rules-container" class="p-6">
-                                <div class="rule-item">
-                                    <div class="p-4">
-                                        <div class="flex items-start">
-                                            <div class="flex-shrink-0 w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-1">
-                                                1
-                                            </div>
-                                            <div class="flex-1">
-                                                <h4 class="font-semibold text-gray-800 mb-2">การสมัครสมาชิก</h4>
-                                                <p class="text-gray-600 leading-relaxed">ผู้เล่นใหม่ต้องอ่านกฎทั้งหมดก่อนเริ่มเล่น</p>
-                                                <div class="mt-3 p-3 bg-red-50 border-l-4 border-red-400 rounded">
-                                                    <p class="text-sm text-red-700">
-                                                        <i class="fas fa-exclamation-triangle mr-1"></i>
-                                                        <strong>โทษ:</strong> เตือน
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="rule-item">
-                                    <div class="p-4">
-                                        <div class="flex items-start">
-                                            <div class="flex-shrink-0 w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-1">
-                                                2
-                                            </div>
-                                            <div class="flex-1">
-                                                <h4 class="font-semibold text-gray-800 mb-2">การเล่นครั้งแรก</h4>
-                                                <p class="text-gray-600 leading-relaxed">ให้ติดต่อแอดมินเพื่อรับคำแนะนำการเล่น</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- Content will be loaded dynamically -->
                             </div>
                         </div>
                     </div>
@@ -229,25 +159,7 @@
                                 <p class="text-blue-100 mt-2">กฎการเล่นบทบาทในเกม</p>
                             </div>
                             <div id="roleplay-rules-container" class="p-6">
-                                <div class="rule-item">
-                                    <div class="p-4">
-                                        <div class="flex items-start">
-                                            <div class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-1">
-                                                1
-                                            </div>
-                                            <div class="flex-1">
-                                                <h4 class="font-semibold text-gray-800 mb-2">การแสดงบทบาท</h4>
-                                                <p class="text-gray-600 leading-relaxed">ต้องเล่นตามบทบาทอย่างสมจริง</p>
-                                                <div class="mt-3 p-3 bg-red-50 border-l-4 border-red-400 rounded">
-                                                    <p class="text-sm text-red-700">
-                                                        <i class="fas fa-exclamation-triangle mr-1"></i>
-                                                        <strong>โทษ:</strong> เตือน - แบน
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- Content will be loaded dynamically -->
                             </div>
                         </div>
                     </div>
@@ -263,25 +175,7 @@
                                 <p class="text-red-100 mt-2">กฎข้อบังคับทั่วไปของเซิร์ฟเวอร์</p>
                             </div>
                             <div id="server-country-rules-container" class="p-6">
-                                <div class="rule-item">
-                                    <div class="p-4">
-                                        <div class="flex items-start">
-                                            <div class="flex-shrink-0 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-1">
-                                                1
-                                            </div>
-                                            <div class="flex-1">
-                                                <h4 class="font-semibold text-gray-800 mb-2">ความเคารพ</h4>
-                                                <p class="text-gray-600 leading-relaxed">เคารพผู้เล่นคนอื่นและเจ้าหน้าที่</p>
-                                                <div class="mt-3 p-3 bg-red-50 border-l-4 border-red-400 rounded">
-                                                    <p class="text-sm text-red-700">
-                                                        <i class="fas fa-exclamation-triangle mr-1"></i>
-                                                        <strong>โทษ:</strong> เตือน - แบน
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- Content will be loaded dynamically -->
                             </div>
                         </div>
                     </div>
@@ -297,25 +191,7 @@
                                 <p class="text-purple-100 mt-2">กฎการไล่ล่าผู้ที่กำลังสตรีม</p>
                             </div>
                             <div id="stream-snipe-rules-container" class="p-6">
-                                <div class="rule-item">
-                                    <div class="p-4">
-                                        <div class="flex items-start">
-                                            <div class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-1">
-                                                1
-                                            </div>
-                                            <div class="flex-1">
-                                                <h4 class="font-semibold text-gray-800 mb-2">ห้าม Stream Snipe</h4>
-                                                <p class="text-gray-600 leading-relaxed">ห้ามใช้ข้อมูลจากการสตรีมมาใช้ในเกม</p>
-                                                <div class="mt-3 p-3 bg-red-50 border-l-4 border-red-400 rounded">
-                                                    <p class="text-sm text-red-700">
-                                                        <i class="fas fa-exclamation-triangle mr-1"></i>
-                                                        <strong>โทษ:</strong> แบนถาวร
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- Content will be loaded dynamically -->
                             </div>
                         </div>
                     </div>
@@ -340,9 +216,35 @@
                 </p>
             </div>
         </div>
-    </footer>
-
+    </footer>    <!-- Scripts -->
+    <script src="https://trpxx.github.io/FamUnity-Rules/scripts/rules-loader.js"></script>
     <script>
+        // Initialize particles
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#fbbf24" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: false },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: "#fbbf24", opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 6, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
+                    modes: { repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 } }
+                },
+                retina_detect: true
+            });
+        }
+
+        // Initialize rules loader
+        document.addEventListener('DOMContentLoaded', function() {
+            new RulesLoader();
+        });
+
         // Toggle category function
         function toggleCategory(categoryId) {
             const content = document.getElementById(categoryId);
@@ -372,8 +274,6 @@
                 }
             });
         });
-
-        console.log('🎉 Static HTML version loaded successfully!');
     </script>
 </body>
 </html>
