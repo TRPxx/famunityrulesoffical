@@ -1,9 +1,9 @@
 {
   "title": "กฎการอุ้ม",
-  "subtitle": "Kidnapping Rules - กฎและข้อกำหนดการอุ้มตัว",
-  "description": "กฎและข้อกำหนดสำหรับการอุ้มตัวและการควบคุมตัวบุคคลในเกม",
+  "subtitle": "Kidnapping Rules - กฎและข้อกำหนดการอุ้ม",
+  "description": "กฎและข้อกำหนดสำหรับการอุ้มและการควบคุมตัวบุคคลในเกม",
   "icon": "fas fa-user-lock",
-  "color": "orange",  "rules": [
+  "color": "orange","rules": [
     {
       "text": "ศพหลุดในเมืองต้องแจ้งภายใน 5 นาที",
       "type": "title",

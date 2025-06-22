@@ -5,7 +5,7 @@
       "title": "กฎผู้เล่นใหม่",
       "category": "basic",
       "order": 1,
-      "description": "กฎและข้อแนะนำสำหรับผู้เล่นใหม่"
+      "description": "กฎและข้อกำหนดสำหรับผู้เล่นใหม่ของ Fam Unity เพื่อประสบการณ์เล่นเกมที่ดี"
     },
     "roleplay-rules": {
       "enabled": true,
@@ -40,7 +40,7 @@
       "title": "การส่งหลักฐาน",
       "category": "safety",
       "order": 6,
-      "description": "วิธีการและกฎการส่งหลักฐาน"
+      "description": "กฎและข้อกำหนดสำหรับการส่งหลักฐานต่อเจ้าหน้าที่และทีมงาน"
     },    "twitter-rules": {
       "enabled": true,
       "title": "กฎการใช้งาน Twitter",
@@ -57,17 +57,17 @@
     },
     "kidnapping-rules": {
       "enabled": true,
-      "title": "กฎการลักพาตัว",
+      "title": "กฎการอุ้ม",
       "category": "action",
       "order": 9,
-      "description": "กฎการอุ้มและลักพาตัว"
+      "description": "กฎการอุ้ม"
     },
     "airdrop-rules": {
       "enabled": true,
       "title": "กฏ Airdrop",
       "category": "activity",
       "order": 10,
-      "description": "กฎและข้อกำหนดกิจกรรม Airdrop"
+      "description": "กฎและข้อกำหนดหลักสำหรับการเข้าร่วมกิจกรรม Airdrop"
     },
     "shop-robbery-activity-rules": {
       "enabled": true,
@@ -77,7 +77,7 @@
       "description": "กฎกิจกรรมงัดร้านสำหรับประชาชน"
     },
     "family-gang-shop-robbery-rules": {
-      "enabled": true,
+      "enabled": false,
       "title": "กฎกิจกรรมงัดร้าน (ครอบครัวและแก๊ง)",
       "category": "activity",
       "order": 12,

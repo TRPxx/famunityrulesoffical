@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>กฎ | Fam Unity Rules</title>
+    <title>กฎ | Fam Unity Rules v2.13 - Fix Disabled Rules</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- External Resources -->
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+      <!-- External Resources -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
-    <style>
-        body { font-family: 'Kanit', 'Inter', sans-serif; }
-        .nav-link {
+      <style>
+        body { font-family: 'Kanit', 'Inter', sans-serif; }        .nav-link {
             display: flex;
             align-items: center;
             padding: 0.5rem 0.75rem;
@@ -23,8 +20,7 @@
             text-decoration: none;
             border-radius: 0.375rem;
             transition: all 0.2s ease;
-        }
-        .nav-link:hover {
+        }        .nav-link:hover {
             background-color: #f8fafc;
             color: #eab308;
             transform: translateX(4px);
@@ -39,9 +35,12 @@
             cursor: pointer;
             transition: all 0.2s ease;
             border: 1px solid #e2e8f0;
-        }
-        .category-header:hover {
+        }        .category-header:hover {
             background-color: #f1f5f9;
+        }
+        .category-header.collapsed {
+            background-color: #f1f5f9;
+            border-color: #cbd5e1;
         }
         .category-content {
             display: none;
@@ -70,16 +69,118 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+          /* Hero Section Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(5deg); }
+        }
+        
+        .hero-icon {
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .hero-content > *:nth-child(1) { 
+            animation: fadeInUp 1s ease-out;
+            animation-delay: 0.2s;
+            animation-fill-mode: both;
+        }
+        .hero-content > *:nth-child(2) { 
+            animation: slideInLeft 1s ease-out;
+            animation-delay: 0.4s;
+            animation-fill-mode: both;
+        }
+        .hero-content > *:nth-child(3) { 
+            animation: slideInRight 1s ease-out;
+            animation-delay: 0.6s;
+            animation-fill-mode: both;
+        }
+        .hero-content > *:nth-child(4) { 
+            animation: fadeInUp 1s ease-out;
+            animation-delay: 0.8s;
+            animation-fill-mode: both;
+        }
+        .hero-content > *:nth-child(5) { 
+            animation: fadeInUp 1s ease-out;
+            animation-delay: 1s;
+            animation-fill-mode: both;
+        }
+        .hero-content > *:nth-child(6) { 
+            animation: fadeInUp 1s ease-out;
+            animation-delay: 1.2s;
+            animation-fill-mode: both;
+        }
+        
+        /* Parallax effect */
+        .hero-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Animation delays for particles */
+        .animation-delay-1000 { animation-delay: 1s; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-3000 { animation-delay: 3s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        
+        /* Glowing effect */
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(234, 179, 8, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(234, 179, 8, 0.6), 0 0 60px rgba(234, 179, 8, 0.4); }
+        }
+        
+        .hero-icon {
+            animation: float 8s ease-in-out infinite, glow 3s ease-in-out infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-attachment: scroll;
+            }
+        }
     </style>
 </head>
 
 <body class="text-gray-800 bg-gradient-to-br from-yellow-50 via-white to-orange-50">
     <!-- Top Navbar -->
     <nav class="fixed top-0 right-0 left-0 bg-white/90 backdrop-blur-sm z-40 shadow-md h-16 transition-all duration-300">
-        <div class="container mx-auto px-4 h-full flex items-center justify-between">
-            <div class="flex items-center">
-                <div class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-full mr-3">
-                    <i class="fas fa-gavel text-white text-sm"></i>
+        <div class="container mx-auto px-4 h-full flex items-center justify-between">            <div class="flex items-center">
+                <div class="inline-flex items-center justify-center w-10 h-10 mr-3">
+                    <img src="assets/images/logo.png" alt="Fam Unity Logo" class="w-10 h-10 object-contain">
                 </div>
                 <h1 class="text-xl font-bold text-gray-800">Fam Unity Rules</h1>
             </div>
@@ -90,28 +191,84 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="relative z-10">
-        <!-- Hero Section -->
-        <section class="pt-24 pb-12 relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-yellow-600/10 via-orange-500/5 to-red-500/10"></div>
+    <main class="relative z-10">        <!-- Hero Section -->
+        <section id="hero-section" class="pt-24 pb-12 relative overflow-hidden min-h-screen flex items-center">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 hero-bg bg-cover bg-center bg-no-repeat" style="background-image: url('assets/images/hero-bg.png');"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-yellow-600/30 via-orange-500/20 to-red-500/30"></div>
+            
+            <!-- Animated Background Particles -->
+            <div class="absolute inset-0">
+                <div class="absolute top-20 left-20 w-3 h-3 bg-yellow-400 rounded-full animate-pulse opacity-70"></div>
+                <div class="absolute top-40 right-32 w-2 h-2 bg-orange-400 rounded-full animate-pulse opacity-50 animation-delay-1000"></div>
+                <div class="absolute bottom-40 left-40 w-4 h-4 bg-red-400 rounded-full animate-pulse opacity-60 animation-delay-2000"></div>
+                <div class="absolute top-60 left-1/3 w-1 h-1 bg-yellow-300 rounded-full animate-pulse opacity-40 animation-delay-3000"></div>
+                <div class="absolute bottom-60 right-20 w-2 h-2 bg-orange-300 rounded-full animate-pulse opacity-50 animation-delay-4000"></div>
+            </div>
+            
+            <!-- Content -->
             <div class="container mx-auto px-4 relative z-10">
-                <div class="max-w-4xl mx-auto text-center">
-                    <div class="mb-8">
-                        <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-full mb-6 shadow-lg">
-                            <i class="fas fa-gavel text-white text-2xl"></i>
+                <div class="max-w-5xl mx-auto text-center">
+                    <div class="mb-12 hero-content">
+                        <!-- Main Icon -->
+                        <div class="inline-flex items-center justify-center w-28 h-28 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-full mb-10 shadow-2xl ring-8 ring-white/20 backdrop-blur-sm hero-icon">
+                            <i class="fas fa-gavel text-white text-4xl"></i>
                         </div>
-                        <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-yellow-600 via-orange-500 to-red-500 bg-clip-text text-transparent mb-4">
-                            กฎ
+                        
+                        <!-- Main Title -->
+                        <h1 class="text-6xl md:text-8xl font-bold text-white mb-8 drop-shadow-2xl">
+                            <span class="bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 bg-clip-text text-transparent">
+                                กฎ
+                            </span>
                         </h1>
-                        <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-6">
+                        
+                        <!-- Subtitle -->
+                        <h2 class="text-3xl md:text-4xl font-semibold text-white/95 mb-6 drop-shadow-lg">
                             Rules - Fam Unity
                         </h2>
-                        <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        
+                        <!-- Description -->
+                        <p class="text-xl md:text-2xl text-white/85 max-w-4xl mx-auto leading-relaxed drop-shadow-lg mb-12">
                             กฎและข้อกำหนดของ Fam Unity เพื่อประสบการณ์เล่นเกมที่ดี
+                            <br class="hidden md:block">
+                            <span class="text-white/70 text-lg">ศึกษากฎให้เข้าใจก่อนเริ่มเล่น เพื่อความสนุกของทุกคน</span>
                         </p>
+                        
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                            <button onclick="document.querySelector('#rules-content').scrollIntoView({behavior: 'smooth'})" 
+                                    class="group bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-12 py-5 rounded-full font-bold text-xl shadow-2xl hover:shadow-yellow-500/30 hover:scale-110 transition-all duration-300 backdrop-blur-sm border-2 border-white/30 hover:border-white/50">
+                                <i class="fas fa-book-open mr-3 group-hover:animate-bounce"></i>
+                                เริ่มอ่านกฎ
+                            </button>
+                            
+                            <!-- Statistics Cards -->
+                            <div class="flex gap-4 mt-4 sm:mt-0">
+                                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 text-center">
+                                    <div class="text-2xl font-bold text-yellow-400">15+</div>
+                                    <div class="text-sm text-white/70">หมวดกฎ</div>
+                                </div>
+                                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 text-center">
+                                    <div class="text-2xl font-bold text-orange-400">100+</div>
+                                    <div class="text-sm text-white/70">ข้อกำหนด</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Scroll Indicator -->
+                        <div class="mt-16 animate-bounce">
+                            <div class="w-8 h-14 border-2 border-white/30 rounded-full mx-auto flex justify-center">
+                                <div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+                            </div>
+                            <p class="text-white/50 text-sm mt-2">เลื่อนลงเพื่ดูกฎ</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Bottom Fade -->
+            <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white via-white/50 to-transparent"></div>
         </section>
 
         <!-- Main Content Area -->
@@ -165,9 +322,7 @@
                 </p>
             </div>
         </div>
-    </footer>
-
-    <script>
+    </footer>    <script>
         // Dynamic Rules Loader for All JSON Data
         class FamUnityRulesLoader {
             constructor() {
@@ -175,6 +330,7 @@
                 this.configData = null;
                 this.visibilityConfig = null;
                 this.rulesData = {};
+                this.timestamp = Date.now(); // เพิ่ม timestamp เพื่อป้องกัน cache
                 this.categories = {
                     basic: { name: 'กฎพื้นฐาน', icon: 'fas fa-book', color: 'blue' },
                     safety: { name: 'กฎความปลอดภัย', icon: 'fas fa-shield-alt', color: 'green' },
@@ -218,14 +374,29 @@
                     console.warn('ไม่สามารถโหลด config ได้, ใช้ค่าเริ่มต้น');
                     this.configData = { ruleFiles: [] };
                 }
-            }
-
-            async loadVisibilityConfig() {
-                try {
-                    const response = await fetch(`${this.baseUrl}rules-visibility-config.json`);
+            }            async loadVisibilityConfig() {                try {
+                    const response = await fetch(`${this.baseUrl}rules-visibility-config.json?t=${this.timestamp}`);
                     this.visibilityConfig = await response.json();
+                    
+                    console.log('📄 โหลด visibility config สำเร็จ');
+                    console.log('🔍 rulesVisibility keys:', Object.keys(this.visibilityConfig?.rulesVisibility || {}));
+                    
+                    // แสดงสถานะของแต่ละกฎ
+                    if (this.visibilityConfig?.rulesVisibility) {
+                        Object.entries(this.visibilityConfig.rulesVisibility).forEach(([ruleId, config]) => {
+                            console.log(`📋 ${ruleId}: enabled = ${config.enabled}, order = ${config.order}`);
+                        });
+                    }
+                      // โหลด categories จาก config file
+                    if (this.visibilityConfig?.categories) {
+                        this.categories = this.visibilityConfig.categories;
+                        console.log('✅ โหลด categories จาก config สำเร็จ:', Object.keys(this.categories));
+                        console.log('📊 Categories ที่ได้:', this.visibilityConfig.categories);
+                    } else {
+                        console.log('⚠️ ไม่พบ categories ใน config, ใช้ค่าเริ่มต้น');
+                    }
                 } catch (error) {
-                    console.warn('ไม่สามารถโหลด visibility config ได้');
+                    console.warn('❌ ไม่สามารถโหลด visibility config ได้:', error);
                     this.visibilityConfig = { rulesVisibility: {} };
                 }
             }
@@ -245,44 +416,73 @@
                 });
 
                 await Promise.all(loadPromises);
-            }
-
-            getVisibleRules() {
+            }            getVisibleRules() {
                 if (!this.visibilityConfig?.rulesVisibility) {
+                    console.log('⚠️ ไม่พบ visibility config, แสดงกฎทั้งหมด');
                     return Object.keys(this.rulesData);
                 }
 
-                return Object.keys(this.visibilityConfig.rulesVisibility)
-                    .filter(ruleId => this.visibilityConfig.rulesVisibility[ruleId].enabled)
-                    .sort((a, b) => {
-                        const orderA = this.visibilityConfig.rulesVisibility[a]?.order || 999;
-                        const orderB = this.visibilityConfig.rulesVisibility[b]?.order || 999;
-                        return orderA - orderB;
-                    });
-            }
+                const allRules = Object.keys(this.visibilityConfig.rulesVisibility);
+                const enabledRules = allRules.filter(ruleId => {
+                    const isEnabled = this.visibilityConfig.rulesVisibility[ruleId].enabled;
+                    console.log(`📋 กฎ ${ruleId}: enabled = ${isEnabled}`);
+                    return isEnabled;
+                });
+                
+                const sortedRules = enabledRules.sort((a, b) => {
+                    const orderA = this.visibilityConfig.rulesVisibility[a]?.order || 999;
+                    const orderB = this.visibilityConfig.rulesVisibility[b]?.order || 999;
+                    return orderA - orderB;
+                });
 
-            renderNavigation() {
+                console.log('✅ กฎที่จะแสดง:', sortedRules);
+                console.log('❌ กฎที่ถูกซ่อน:', allRules.filter(id => !this.visibilityConfig.rulesVisibility[id].enabled));
+                
+                return sortedRules;
+            }renderNavigation() {
                 const visibleRules = this.getVisibleRules();
                 const groupedRules = this.groupRulesByCategory(visibleRules);
                 
-                // Render sidebar navigation
+                console.log('🔍 Debug renderNavigation:');
+                console.log('- visibleRules:', visibleRules);
+                console.log('- groupedRules:', groupedRules);
+                console.log('- this.categories:', this.categories);
+                console.log('- this.visibilityConfig?.categories:', this.visibilityConfig?.categories);
+                  // Render sidebar navigation
                 const sidebarNav = document.getElementById('sidebar-navigation');
                 let sidebarHTML = '';
 
-                Object.keys(groupedRules).forEach(categoryKey => {
-                    const category = this.categories[categoryKey] || { name: categoryKey, icon: 'fas fa-list', color: 'gray' };
+                // เรียงลำดับ categories ตาม order
+                const sortedCategories = Object.keys(groupedRules).sort((a, b) => {
+                    const categoryA = this.visibilityConfig?.categories?.[a] || this.categories[a] || {};
+                    const categoryB = this.visibilityConfig?.categories?.[b] || this.categories[b] || {};
+                    return (categoryA.order || 999) - (categoryB.order || 999);
+                });
+
+                sortedCategories.forEach(categoryKey => {
+                    // ใช้ categories จาก visibility config หรือค่าเริ่มต้น
+                    let category;
+                    if (this.visibilityConfig?.categories?.[categoryKey]) {
+                        category = this.visibilityConfig.categories[categoryKey];
+                        console.log(`✅ ใช้ category จาก config: ${categoryKey}`, category);
+                    } else {
+                        category = this.categories[categoryKey] || { name: categoryKey, icon: 'fas fa-list', color: 'gray' };
+                        console.log(`⚠️ ใช้ category เริ่มต้น: ${categoryKey}`, category);
+                    }
+                    
                     const rules = groupedRules[categoryKey];
                     
                     sidebarHTML += `
-                        <div class="category-group">
+                        <div class="category-group mb-4">
                             <div class="category-header" onclick="toggleCategory('${categoryKey}-rules')">
                                 <div class="category-title flex items-center">
                                     <i class="${category.icon} text-${category.color}-500 mr-2"></i>
                                     <span class="font-semibold text-gray-800">${category.name}</span>
+                                    <span class="ml-2 text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">${rules.length}</span>
                                 </div>
                                 <i class="fas fa-chevron-down toggle-icon text-gray-400 transition-transform duration-200"></i>
                             </div>
-                            <div class="category-content expanded" id="${categoryKey}-rules">
+                            <div class="category-content" id="${categoryKey}-rules">
                                 ${rules.map(ruleId => {
                                     const ruleData = this.rulesData[ruleId];
                                     const visibilityData = this.visibilityConfig?.rulesVisibility?.[ruleId];
@@ -373,9 +573,8 @@
                                         ${title}
                                     </h3>
                                     <p class="text-white/90 mt-2">${description}</p>
-                                </div>
-                                <div class="p-6">
-                                    ${this.renderRuleItems(ruleData.rules || [])}
+                                </div>                                <div class="p-6">
+                                    ${this.renderRuleItems(ruleData.rules || [], ruleId)}
                                 </div>
                             </div>
                         </div>
@@ -383,9 +582,7 @@
                 });
 
                 contentContainer.innerHTML = contentHTML;
-            }
-
-            getRuleColor(ruleData) {
+            }            getRuleColor(ruleData) {
                 const color = ruleData?.color?.toLowerCase();
                 const colorMap = {
                     'red': 'from-red-500 to-red-600',
@@ -399,69 +596,194 @@
                 return colorMap[color] || 'from-gray-500 to-gray-600';
             }
 
-            renderRuleItems(rules) {
+            getRuleNumberColor(ruleData) {
+                const color = ruleData?.color?.toLowerCase();
+                
+                // แปลงสีจาก gradient เป็นสี solid สำหรับ rule numbers
+                const colorMap = {
+                    'red': 'red-500',
+                    'blue': 'blue-500',
+                    'green': 'green-500',
+                    'purple': 'purple-500',
+                    'yellow': 'yellow-500',
+                    'orange': 'orange-500'
+                };
+                
+                return colorMap[color] || 'gray-500';
+            }
+
+            getCategoryColor(ruleId) {
+                const visibilityData = this.visibilityConfig?.rulesVisibility?.[ruleId];
+                const categoryKey = visibilityData?.category || 'basic';
+                const category = this.visibilityConfig?.categories?.[categoryKey] || this.categories[categoryKey];
+                
+                if (!category?.color) return 'blue-500';
+                
+                // แปลงสีจาก config เป็น Tailwind color classes
+                const colorMap = {
+                    'blue': 'blue-500',
+                    'red': 'red-500',
+                    'red-600': 'red-600',
+                    'orange': 'orange-500',
+                    'green': 'green-500',
+                    'purple': 'purple-500',
+                    'yellow': 'yellow-500',
+                    'indigo': 'indigo-500',
+                    'pink': 'pink-500',
+                    'gray': 'gray-500'
+                };
+                
+                return colorMap[category.color] || 'blue-500';
+            }            renderRuleItems(rules, ruleId) {
                 if (!rules || rules.length === 0) {
                     return '<p class="text-gray-500 text-center py-8">ไม่มีข้อมูลกฎในหมวดนี้</p>';
                 }
 
+                // ดึงสีของหัวข้อหลักสำหรับใช้กับ rule numbers
+                const ruleData = this.rulesData[ruleId];
+                const ruleNumberColor = this.getRuleNumberColor(ruleData);
+
                 return rules.map((rule, index) => {
-                    if (rule.type === 'title') {
+                    const ruleNumber = index + 1;
+                      if (rule.type === 'title') {
                         return `
-                            <div class="mb-6">
-                                <h4 class="text-lg font-bold text-gray-800 mb-2">${rule.text}</h4>
-                                ${rule.description ? `<p class="text-gray-600 leading-relaxed">${rule.description}</p>` : ''}
-                                ${rule.penalty ? `
-                                    <div class="mt-3 p-3 bg-red-50 border-l-4 border-red-400 rounded">
-                                        <p class="text-sm text-red-700">
-                                            <i class="fas fa-exclamation-triangle mr-1"></i>
-                                            <strong>โทษ:</strong> ${rule.penalty}
-                                        </p>
+                            <div class="rule-item mb-6">
+                                <div class="p-4">
+                                    <div class="flex ${rule.description ? 'items-start' : 'items-center'}">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-${ruleNumberColor} text-white rounded-lg flex items-center justify-center text-sm font-bold mr-4 ${rule.description ? 'mt-1' : ''}">
+                                            ${ruleNumber}
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-lg font-bold text-gray-800 ${rule.description ? 'mb-2' : ''} ${rule.penalty ? 'flex items-center flex-wrap gap-2' : ''}">
+                                                ${rule.text}
+                                                ${rule.penalty ? this.renderPenaltyBadges(rule.penalty) : ''}
+                                            </h4>
+                                            ${rule.description ? `<p class="text-gray-600 leading-relaxed">${rule.description}</p>` : ''}
+                                        </div>
                                     </div>
-                                ` : ''}
+                                </div>
                             </div>
                         `;
                     }
-
-                    const ruleNumber = index + 1;
+                    
                     return `
                         <div class="rule-item mb-4">
                             <div class="p-4">
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-1">
+                                <div class="flex ${rule.description ? 'items-start' : 'items-center'}">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-${ruleNumberColor} text-white rounded-lg flex items-center justify-center text-sm font-bold mr-3 ${rule.description ? 'mt-1' : ''}">
                                         ${ruleNumber}
                                     </div>
                                     <div class="flex-1">
-                                        <p class="text-gray-800 leading-relaxed">${rule.text}</p>
+                                        <p class="text-gray-800 leading-relaxed ${rule.penalty ? 'flex items-center flex-wrap gap-2' : ''}">
+                                            ${rule.text}
+                                            ${rule.penalty ? this.renderPenaltyBadges(rule.penalty) : ''}
+                                        </p>
                                         ${rule.description ? `<p class="text-gray-600 text-sm mt-2">${rule.description}</p>` : ''}
-                                        ${rule.penalty ? `
-                                            <div class="mt-3 p-3 bg-red-50 border-l-4 border-red-400 rounded">
-                                                <p class="text-sm text-red-700">
-                                                    <i class="fas fa-exclamation-triangle mr-1"></i>
-                                                    <strong>โทษ:</strong> ${rule.penalty}
-                                                </p>
-                                            </div>
-                                        ` : ''}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     `;
                 }).join('');
-            }
-
-            setupSmoothScrolling() {
+            }getPenaltyBadgeStyle(penalty) {
+                if (!penalty) return '';
+                
+                const penaltyLower = penalty.toLowerCase();
+                
+                // แยกสีตามประเภทของโทษ
+                if (penaltyLower.includes('แบนถาวร') || penaltyLower.includes('แบน 7 วัน') || penaltyLower.includes('ใบแดง') || penaltyLower.includes('🟥')) {
+                    return 'bg-red-100 text-red-800 border-red-200';
+                } else if (penaltyLower.includes('แบน 3 วัน') || penaltyLower.includes('แบน 1 วัน') || penaltyLower.includes('ใบส้ม') || penaltyLower.includes('🟧')) {
+                    return 'bg-orange-100 text-orange-800 border-orange-200';
+                } else if (penaltyLower.includes('เตือน') || penaltyLower.includes('ใบเหลือง') || penaltyLower.includes('🟨')) {
+                    return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+                } else if (penaltyLower.includes('ปรับเงิน') || penaltyLower.includes('💵')) {
+                    return 'bg-green-100 text-green-800 border-green-200';
+                } else if (penaltyLower.includes('kick') || penaltyLower.includes('เตะ')) {
+                    return 'bg-blue-100 text-blue-800 border-blue-200';
+                } else {
+                    return 'bg-gray-100 text-gray-800 border-gray-200';
+                }
+            }            renderPenaltyBadges(penalty) {
+                if (!penalty) return '';
+                
+                // แยกโทษที่มีหลายแบบ เช่น "🟨 ใบเหลือง , 🟧 ใบส้ม , 🟥 ใบแดง"
+                if (penalty.includes(',')) {
+                    const penalties = penalty.split(',').map(p => p.trim());
+                    return penalties.map(p => `
+                        <span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium border ${this.getPenaltyBadgeStyle(p)}">
+                            ${p}
+                        </span>
+                    `).join('');
+                }
+                
+                // โทษเดียว
+                return `
+                    <span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium border ${this.getPenaltyBadgeStyle(penalty)}">
+                        ${penalty}
+                    </span>
+                `;
+            }setupSmoothScrolling() {
+                const self = this; // เก็บ reference ของ this
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                     anchor.addEventListener('click', function (e) {
                         e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
+                        const targetId = this.getAttribute('href').substring(1);
+                        const target = document.getElementById(targetId);
+                        
+                        console.log('Clicking on:', targetId, 'Target found:', !!target); // Debug log
+                        
                         if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
+                            // คำนวณ offset เพื่อให้หัวข้อตรงกับ sidebar
+                            const navbarHeight = 64; // ความสูงของ navbar (h-16 = 4rem = 64px)
+                            const sidebarOffset = 20; // เพิ่ม offset เพื่อให้ตรงกับตำแหน่งที่เหมาะสม
+                            const totalOffset = navbarHeight + sidebarOffset;
+                            
+                            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - totalOffset;
+                            
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
                             });
+                            
+                            // เพิ่ม highlight effect ให้กับหัวข้อที่ถูกคลิก
+                            self.highlightActiveNavItem(targetId);
+                        } else {
+                            console.error('Target element not found:', targetId); // Debug log
                         }
                     });
                 });
+
+                // เพิ่ม scroll spy เพื่อ highlight nav item ขณะ scroll
+                this.setupScrollSpy();
+            }            highlightActiveNavItem(activeId) {
+                // ลบการ highlight nav item - ไม่ต้องการ active state
+                // เดิม: มีการเพิ่ม bg-yellow-100, text-yellow-700, font-semibold
+                // ตอนนี้: ไม่ทำอะไร เพื่อไม่ให้มี highlight effect
+                console.log('ไม่ highlight nav item:', activeId);
+            }            setupScrollSpy() {
+                // ปิดการใช้งาน scroll spy - ไม่ต้องการ auto highlight
+                console.log('Scroll spy disabled - ไม่ทำการ highlight nav items อัตโนมัติ');
+                
+                /* เดิม: มีการ observe sections และ highlight nav items
+                const ruleIds = Object.keys(this.rulesData);
+                const sections = ruleIds.map(id => document.getElementById(id)).filter(el => el);
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+                            this.highlightActiveNavItem(entry.target.id);
+                        }
+                    });
+                }, {
+                    rootMargin: '-100px 0px -60% 0px',
+                    threshold: [0, 0.3, 0.7]
+                });
+                
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+                */
             }
 
             showError() {
@@ -479,27 +801,73 @@
                     </div>
                 `;
             }
-        }
-
-        // Toggle category function
+        }        // Toggle category function
         function toggleCategory(categoryId) {
             const content = document.getElementById(categoryId);
-            const icon = content.previousElementSibling.querySelector('.toggle-icon');
+            const header = content.previousElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            console.log('🔄 Toggle category:', categoryId, 'expanded:', content.classList.contains('expanded'));
             
             if (content.classList.contains('expanded')) {
+                // Collapse
                 content.classList.remove('expanded');
                 content.style.display = 'none';
                 icon.style.transform = 'rotate(-90deg)';
+                header.classList.add('collapsed');
             } else {
+                // Expand
                 content.classList.add('expanded');
                 content.style.display = 'block';
                 icon.style.transform = 'rotate(0deg)';
+                header.classList.remove('collapsed');
             }
         }
 
-        // Initialize when page loads
+        // Hero Section Wheel Scroll to Rules
+        function setupHeroScrolling() {
+            const heroSection = document.getElementById('hero-section');
+            const rulesContent = document.getElementById('rules-content');
+            let scrollTimeout;
+
+            if (heroSection && rulesContent) {
+                heroSection.addEventListener('wheel', function(e) {
+                    // ป้องกันการ scroll ซ้ำๆ เร็วเกินไป
+                    if (scrollTimeout) return;
+                    
+                    // ตรวจสอบว่า scroll ลง (deltaY > 0)
+                    if (e.deltaY > 0) {
+                        e.preventDefault();
+                        
+                        // คำนวณตำแหน่งที่ต้องการ scroll ไป
+                        const navbarHeight = 64; // ความสูงของ navbar
+                        const sidebarOffset = 20; // offset เพิ่มเติม
+                        const totalOffset = navbarHeight + sidebarOffset;
+                        const targetPosition = rulesContent.getBoundingClientRect().top + window.pageYOffset - totalOffset;
+                        
+                        // Smooth scroll ไปยัง rules content
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // ป้องกันการ scroll ซ้ำเป็นเวลา 1 วินาที
+                        scrollTimeout = setTimeout(() => {
+                            scrollTimeout = null;
+                        }, 1000);
+                    }
+                });
+            }
+        }        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔄 หน้าเว็บโหลดแล้ว! เวลา:', new Date().toLocaleTimeString());
+            console.log('📍 Collapsed Sidebar v2.11 - ซ่อนข้อย่อยใน sidebar');
+            console.log('✅ กำลังเริ่มต้น FamUnityRulesLoader...');
             new FamUnityRulesLoader();
+            
+            // เรียกใช้ hero section wheel scrolling
+            setupHeroScrolling();
+            console.log('🖱️ เปิดใช้งาน Hero Section Wheel Scroll แล้ว');
         });
     </script>
 </body>
