@@ -47,19 +47,22 @@ class RulesLoader {
                 "stream-snipe-rules.json",
                 "server-country-rules.json"
             ]
-        };
-
-        // Fallback rules data
+        };        // Fallback rules data
         this.rulesData = {
             'new-player-rules': {
                 title: 'กฎสำหรับผู้เล่นใหม่',
                 description: 'กฎพื้นฐานสำหรับผู้เข้าใหม่ในเซิร์ฟเวอร์',
                 rules: [
                     {
-                        title: 'การสมัครสมาชิก',
+                        text: 'การสมัครสมาชิก',
                         description: 'ผู้เล่นใหม่ต้องอ่านกฎทั้งหมดก่อนเริ่มเล่น',
                         examples: ['อ่านกฎในเว็บไซต์', 'ยืนยันการอ่านกฎ'],
                         penalty: 'เตือน'
+                    },
+                    {
+                        text: 'การเล่นครั้งแรก',
+                        description: 'ให้ติดต่อแอดมินเพื่อรับคำแนะนำการเล่น',
+                        penalty: 'ไม่มี'
                     }
                 ]
             },
@@ -68,9 +71,14 @@ class RulesLoader {
                 description: 'กฎการเล่นบทบาทในเกม',
                 rules: [
                     {
-                        title: 'การแสดงบทบาท',
+                        text: 'การแสดงบทบาท',
                         description: 'ต้องเล่นตามบทบาทอย่างสมจริง',
                         penalty: 'เตือน - แบน'
+                    },
+                    {
+                        text: 'การพูดคุยในตัวละคร (IC)',
+                        description: 'ต้องพูดในลักษณะตัวละครเท่านั้น',
+                        penalty: 'เตือน'
                     }
                 ]
             },
@@ -79,7 +87,7 @@ class RulesLoader {
                 description: 'กฎเกี่ยวกับการไล่ล่าผู้ที่กำลังสตรีม',
                 rules: [
                     {
-                        title: 'ห้าม Stream Snipe',
+                        text: 'ห้าม Stream Snipe',
                         description: 'ห้ามใช้ข้อมูลจากการสตรีมมาใช้ในเกม',
                         penalty: 'แบนถาวร'
                     }
@@ -90,9 +98,14 @@ class RulesLoader {
                 description: 'กฎข้อบังคับทั่วไปของเซิร์ฟเวอร์',
                 rules: [
                     {
-                        title: 'ความเคารพ',
+                        text: 'ความเคารพ',
                         description: 'เคารพผู้เล่นคนอื่นและเจ้าหน้าที่',
                         penalty: 'เตือน - แบน'
+                    },
+                    {
+                        text: 'การใช้ภาษา',
+                        description: 'ใช้ภาษาที่สุภาพ ไม่ด่าทอ',
+                        penalty: 'เตือน'
                     }
                 ]
             }
