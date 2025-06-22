@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test CSS/JS Loading - Fam Unity Rules</title>
+    <link href="https://trpxx.github.io/FamUnity-Rules/test.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="test-title">🧪 Test CSS/JS Loading</h1>
+        
+        <div id="cssStatus" class="test-status">
+            ⏳ กำลังตรวจสอบ CSS...
+        </div>
+        
+        <div id="jsStatus" class="test-status">
+            ⏳ กำลังตรวจสอบ JavaScript...
+        </div>
+        
+        <div id="apiStatus" class="test-status">
+            ⏳ กำลังตรวจสอบการเชื่อมต่อ API...
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <a href="https://trpxx.github.io/FamUnity-Rules/" style="color: #ffd700; text-decoration: none; font-weight: bold;">
+                ← กลับไปหน้าหลัก
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Test JavaScript loading
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🟢 JavaScript loaded successfully!');
+            
+            // Update JS status
+            const jsStatus = document.getElementById('jsStatus');
+            jsStatus.innerHTML = '✅ JavaScript โหลดสำเร็จ!';
+            jsStatus.classList.add('js-loaded');
+            
+            // Test CSS loading by checking computed styles
+            const testContainer = document.querySelector('.test-container');
+            const computedStyle = window.getComputedStyle(testContainer);
+            const cssStatus = document.getElementById('cssStatus');
+            
+            if (computedStyle.backdropFilter === 'blur(10px)' || computedStyle.webkitBackdropFilter === 'blur(10px)') {
+                cssStatus.innerHTML = '✅ CSS โหลดสำเร็จ!';
+                cssStatus.classList.add('css-loaded');
+                console.log('🟢 CSS loaded successfully!');
+            } else {
+                cssStatus.innerHTML = '❌ CSS ไม่ได้โหลด';
+                cssStatus.style.background = 'rgba(255, 0, 0, 0.2)';
+                cssStatus.style.border = '2px solid #ff0000';
+                console.log('🔴 CSS not loaded properly');
+            }
+            
+            // Test API connectivity
+            const apiStatus = document.getElementById('apiStatus');
+            
+            fetch('https://trpxx.github.io/FamUnity-Rules/data/rules-config.json')
+                .then(response => {
+                    if (response.ok) {
+                        apiStatus.innerHTML = '✅ เชื่อมต่อ API สำเร็จ!';
+                        apiStatus.classList.add('css-loaded');
+                        console.log('🟢 API connection successful!');
+                        return response.json();
+                    } else {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                })
+                .then(data => {
+                    console.log('📄 Config data loaded:', data);
+                })
+                .catch(error => {
+                    apiStatus.innerHTML = `❌ เชื่อมต่อ API ไม่ได้: ${error.message}`;
+                    apiStatus.style.background = 'rgba(255, 0, 0, 0.2)';
+                    apiStatus.style.border = '2px solid #ff0000';
+                    console.log('🔴 API connection failed:', error);
+                });
+        });
+    </script>
+</body>
+</html>
