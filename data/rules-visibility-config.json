@@ -69,6 +69,13 @@
       "order": 10,
       "description": "กฎและข้อกำหนดหลักสำหรับการเข้าร่วมกิจกรรม Airdrop"
     },
+    "module-rules": {
+      "enabled": true,
+      "title": "กฎการเล่น Module",
+      "category": "activity",
+      "order": 10.5,
+      "description": "ข้อกำหนดและแนวทางสำหรับกิจกรรม Module เพื่อความยุติธรรมและสนุกสนาน"
+    },
     "shop-robbery-activity-rules": {
       "enabled": true,
       "title": "กฎกิจกรรมงัดร้าน (ประชาชน)",
