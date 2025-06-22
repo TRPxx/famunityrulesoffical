@@ -1,31 +1,178 @@
-// Dynamic Rules Loader for Fam Unity
+// Rules Loader for Fam Unity - GitHub Pages Static Version
 class RulesLoader {
     constructor() {
         this.configData = null;
         this.rulesData = {};
-        this.visibilityConfig = null;
+        this.baseUrl = 'https://trpxx.github.io/FamUnity-Rules/';
         this.init();
-    }    async init() {
+    }
+
+    async init() {
         console.log('RulesLoader: Initializing...');
         
         // Show loading state
         this.showLoadingState();
         
         try {
-            // Load configuration files
+            // Load configuration
             await this.loadConfigData();
             
-            // Load visibility config if enabled
-            if (this.configData.enableVisibilityControl) {
-                await this.loadVisibilityConfig();
-            }
-            
+            // Load all rules data
             await this.loadAllRulesData();
+            
             console.log('RulesLoader: All files loaded successfully');
             this.renderRules();
         } catch (error) {
             console.error('RulesLoader: Failed to load rules data:', error);
-            this.showErrorMessage();
+            this.loadFallbackData();
+            this.renderRules();
+        }
+    }
+
+    loadFallbackData() {
+        console.log('Loading fallback data...');
+        
+        // Fallback configuration
+        this.configData = {
+            pageInfo: {
+                title: "กฎ",
+                pageTitle: "กฎ | Fam Unity",
+                heroTitle: "กฎ",
+                heroSubtitle: "Rules - Fam Unity",
+                heroDescription: "กฎและข้อกำหนดของ Fam Unity เพื่อประสบการณ์เล่นเกมที่ดี"
+            },
+            ruleFiles: [
+                "new-player-rules.json",
+                "roleplay-rules.json",
+                "stream-snipe-rules.json",
+                "server-country-rules.json"
+            ]
+        };
+
+        // Fallback rules data
+        this.rulesData = {
+            'new-player-rules': {
+                title: 'กฎสำหรับผู้เล่นใหม่',
+                description: 'กฎพื้นฐานสำหรับผู้เข้าใหม่ในเซิร์ฟเวอร์',
+                rules: [
+                    {
+                        title: 'การสมัครสมาชิก',
+                        description: 'ผู้เล่นใหม่ต้องอ่านกฎทั้งหมดก่อนเริ่มเล่น',
+                        examples: ['อ่านกฎในเว็บไซต์', 'ยืนยันการอ่านกฎ'],
+                        penalty: 'เตือน'
+                    }
+                ]
+            },
+            'roleplay-rules': {
+                title: 'กฎ Roleplay',
+                description: 'กฎการเล่นบทบาทในเกม',
+                rules: [
+                    {
+                        title: 'การแสดงบทบาท',
+                        description: 'ต้องเล่นตามบทบาทอย่างสมจริง',
+                        penalty: 'เตือน - แบน'
+                    }
+                ]
+            },
+            'stream-snipe-rules': {
+                title: 'กฎ Stream Snipe',
+                description: 'กฎเกี่ยวกับการไล่ล่าผู้ที่กำลังสตรีม',
+                rules: [
+                    {
+                        title: 'ห้าม Stream Snipe',
+                        description: 'ห้ามใช้ข้อมูลจากการสตรีมมาใช้ในเกม',
+                        penalty: 'แบนถาวร'
+                    }
+                ]
+            },
+            'server-country-rules': {
+                title: 'ข้อบังคับประจำเซิร์ฟเวอร์',
+                description: 'กฎข้อบังคับทั่วไปของเซิร์ฟเวอร์',
+                rules: [
+                    {
+                        title: 'ความเคารพ',
+                        description: 'เคารพผู้เล่นคนอื่นและเจ้าหน้าที่',
+                        penalty: 'เตือน - แบน'
+                    }
+                ]
+            }
+        };
+    }    async loadConfigData() {
+        try {
+            const response = await fetch(this.baseUrl + 'data/rules-config.json');
+            if (!response.ok) {
+                throw new Error(`Failed to load config: ${response.status}`);
+            }
+            this.configData = await response.json();
+            console.log('Config loaded:', this.configData);
+        } catch (error) {
+            console.warn('Failed to load config, using fallback');
+            // Fallback config
+            this.configData = {
+                pageInfo: {
+                    title: "กฎ",
+                    pageTitle: "กฎ | Fam Unity",
+                    heroTitle: "กฎ",
+                    heroSubtitle: "Rules - Fam Unity",
+                    heroDescription: "กฎและข้อกำหนดของ Fam Unity เพื่อประสบการณ์เล่นเกมที่ดี"
+                },
+                ruleFiles: [
+                    "new-player-rules.json",
+                    "roleplay-rules.json",
+                    "stream-snipe-rules.json",
+                    "server-country-rules.json"
+                ]
+            };
+        }
+    }    async loadVisibilityConfig() {
+        try {
+            console.log('Loading visibility configuration...');
+            const response = await fetch(this.baseUrl + 'data/rules-visibility-config.json');
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            this.visibilityConfig = await response.json();
+            console.log('✅ Visibility configuration loaded successfully');
+        } catch (error) {
+            console.warn('⚠️ Could not load visibility config:', error);
+            this.visibilityConfig = null;
+        }
+    }
+
+    async loadAllRulesData() {
+        console.log('Loading all rules data...');
+        const promises = [];
+        
+        if (this.configData && this.configData.rules) {
+            for (const ruleConfig of this.configData.rules) {
+                if (ruleConfig.enabled && ruleConfig.file) {
+                    promises.push(this.loadRuleFile(ruleConfig.id, ruleConfig.file));
+                }
+            }
+        }
+        
+        await Promise.allSettled(promises);
+        console.log('✅ All rules data loading completed');
+    }
+
+    async loadRuleFile(id, filePath) {
+        try {
+            console.log(`Loading ${id} from ${filePath}...`);
+            const response = await fetch(filePath);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            const data = await response.json();
+            this.rulesData[id] = data;
+            console.log(`✅ ${id} loaded successfully`);
+        } catch (error) {
+            console.error(`❌ Failed to load ${id}:`, error);
+            // Set empty data to prevent crashes
+            this.rulesData[id] = {
+                title: `ไม่สามารถโหลด ${id}`,
+                description: "เกิดข้อผิดพลาดในการโหลดข้อมูล",
+                rules: []
+            };
         }
     }showLoadingState() {
         const newPlayerContainer = document.getElementById('new-player-rules-container');
@@ -282,9 +429,11 @@ class RulesLoader {
         }
 
         const visibleRules = this.getVisibleRules();
-        console.log('Loading visible rules:', visibleRules);
-
-        const loadPromises = visibleRules.map(async (filename) => {            const possiblePaths = [
+        console.log('Loading visible rules:', visibleRules);        const loadPromises = visibleRules.map(async (filename) => {
+            const possiblePaths = [
+                `${this.baseUrl}data/${filename}`,
+                `https://trpxx.github.io/FamUnity-Rules/data/${filename}`,
+                `/FamUnity-Rules/data/${filename}`,
                 `./data/${filename}`,
                 `data/${filename}`,
                 `../data/${filename}`,
