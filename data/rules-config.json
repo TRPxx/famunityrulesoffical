@@ -23,6 +23,7 @@
     "kidnapping-rules.json",
     "airdrop-rules.json",
     "module-rules.json",
+    "incident-report-rules.json",
     "shop-robbery-activity-rules.json",
     "family-gang-shop-robbery-rules.json",
     "gang-auction-car-rules.json",
