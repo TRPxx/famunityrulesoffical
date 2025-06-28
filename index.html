@@ -830,18 +830,75 @@
             const header = content.previousElementSibling;
             const icon = header.querySelector('.toggle-icon');
             
+            // Auto close all other expanded categories (with smooth transition)
+            document.querySelectorAll('.category-content.expanded').forEach(el => {
+                if (el.id !== categoryId) {
+                    el.classList.remove('expanded');
+                    // Smoothly collapse
+                    el.style.transition = 'max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s';
+                    el.style.overflow = 'hidden';
+                    el.style.maxHeight = el.scrollHeight + 'px';
+                    el.style.opacity = '1';
+                    setTimeout(() => {
+                        el.style.maxHeight = '0px';
+                        el.style.opacity = '0';
+                    }, 10);
+                    setTimeout(() => {
+                        el.style.display = 'none';
+                        el.style.maxHeight = '';
+                        el.style.opacity = '';
+                        el.style.transition = '';
+                        el.style.overflow = '';
+                    }, 410);
+                    const otherHeader = el.previousElementSibling;
+                    if (otherHeader) {
+                        const otherIcon = otherHeader.querySelector('.toggle-icon');
+                        if (otherIcon) otherIcon.style.transform = 'rotate(-90deg)';
+                        otherHeader.classList.add('collapsed');
+                    }
+                }
+            });
+            
             console.log('🔄 Toggle category:', categoryId, 'expanded:', content.classList.contains('expanded'));
             
             if (content.classList.contains('expanded')) {
-                // Collapse
+                // Collapse (smooth)
                 content.classList.remove('expanded');
-                content.style.display = 'none';
+                content.style.transition = 'max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s';
+                content.style.overflow = 'hidden';
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.opacity = '1';
+                setTimeout(() => {
+                    content.style.maxHeight = '0px';
+                    content.style.opacity = '0';
+                }, 10);
+                setTimeout(() => {
+                    content.style.display = 'none';
+                    content.style.maxHeight = '';
+                    content.style.opacity = '';
+                    content.style.transition = '';
+                    content.style.overflow = '';
+                }, 410);
                 icon.style.transform = 'rotate(-90deg)';
                 header.classList.add('collapsed');
             } else {
-                // Expand
+                // Expand (smooth)
                 content.classList.add('expanded');
                 content.style.display = 'block';
+                content.style.transition = 'max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s';
+                content.style.overflow = 'hidden';
+                content.style.maxHeight = '0px';
+                content.style.opacity = '0';
+                setTimeout(() => {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    content.style.opacity = '1';
+                }, 10);
+                setTimeout(() => {
+                    content.style.maxHeight = '';
+                    content.style.opacity = '';
+                    content.style.transition = '';
+                    content.style.overflow = '';
+                }, 410);
                 icon.style.transform = 'rotate(0deg)';
                 header.classList.remove('collapsed');
             }

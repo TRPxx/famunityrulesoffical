@@ -48,6 +48,13 @@
       "order": 7,
       "description": "กฎการใช้งาน Social Media"
     },
+    "id-card-image-rules": {
+      "enabled": true,
+      "title": "การตั้งรูปภาพบัตรประชาชน",
+      "category": "safety",
+      "order": 7.5,
+      "description": "ข้อกำหนดเกี่ยวกับการเลือกรูปภาพสำหรับบัตรประชาชนในเกม"
+    },
     "robbery-rules": {
       "enabled": false,
       "title": "กฎการปล้น",
