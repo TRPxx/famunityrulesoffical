@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Schedule - Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .debug-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .error {
+            color: #e74c3c;
+            background-color: #fdf2f2;
+            padding: 10px;
+            border-left: 4px solid #e74c3c;
+            margin: 10px 0;
+        }
+        .success {
+            color: #27ae60;
+            background-color: #f0f9f0;
+            padding: 10px;
+            border-left: 4px solid #27ae60;
+            margin: 10px 0;
+        }
+        .activity-item {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 3px solid #007bff;
+        }
+        .status {
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .status.active { background: #d4edda; color: #155724; }
+        .status.upcoming { background: #fff3cd; color: #856404; }
+        .status.completed { background: #d1ecf1; color: #0c5460; }
+        pre {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Schedule Debug Test</h1>
+    
+    <div class="debug-section">
+        <h2>📊 Current Status</h2>
+        <div id="current-status">กำลังโหลด...</div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>📋 Config Loading Test</h2>
+        <div id="config-test">กำลังทดสอบ...</div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>🎯 Activities Test</h2>
+        <div id="activities-test">กำลังทดสอบ...</div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>📝 Debug Log</h2>
+        <div id="debug-log"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>🔍 Raw Config Data</h2>
+        <pre id="raw-config">กำลังโหลด...</pre>
+    </div>
+
+    <script>
+        let debugLog = [];
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString('th-TH');
+            debugLog.push(`[${timestamp}] ${message}`);
+            console.log(`[${type}] ${message}`);
+            updateDebugLog();
+        }
+        
+        function updateDebugLog() {
+            const logElement = document.getElementById('debug-log');
+            logElement.innerHTML = debugLog.map(msg => `<div>${msg}</div>`).join('');
+        }
+        
+        function updateStatus(message, type = 'info') {
+            const statusElement = document.getElementById('current-status');
+            const className = type === 'error' ? 'error' : 'success';
+            statusElement.innerHTML = `<div class="${className}">${message}</div>`;
+        }
+        
+        async function testConfigLoading() {
+            log('🔄 เริ่มทดสอบการโหลด config...');
+            
+            try {
+                const response = await fetch('assets/config/schedule-config.json');
+                log(`📡 Response status: ${response.status}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const config = await response.json();
+                log(`✅ โหลด config สำเร็จ - จำนวนกิจกรรม: ${config.activities.length}`);
+                
+                // แสดงข้อมูล config
+                document.getElementById('raw-config').textContent = JSON.stringify(config, null, 2);
+                document.getElementById('config-test').innerHTML = `
+                    <div class="success">✅ โหลด config สำเร็จ</div>
+                    <p>จำนวนกิจกรรม: ${config.activities.length}</p>
+                    <p>เวอร์ชัน: ${config.version}</p>
+                    <p>อัปเดตล่าสุด: ${config.lastUpdated}</p>
+                `;
+                
+                return config;
+            } catch (error) {
+                log(`❌ ข้อผิดพลาดในการโหลด config: ${error.message}`, 'error');
+                document.getElementById('config-test').innerHTML = `
+                    <div class="error">❌ ไม่สามารถโหลด config ได้</div>
+                    <p>ข้อผิดพลาด: ${error.message}</p>
+                `;
+                return null;
+            }
+        }
+        
+        function testActivities(config) {
+            log('🔄 เริ่มทดสอบกิจกรรม...');
+            
+            if (!config || !config.activities) {
+                log('❌ ไม่มีข้อมูลกิจกรรม', 'error');
+                return;
+            }
+            
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            
+            let html = `<p>เวลาปัจจุบัน: ${now.toLocaleTimeString('th-TH')}</p>`;
+            
+            const activities = config.activities.filter(a => a.enabled);
+            html += `<p>กิจกรรมที่เปิดใช้งาน: ${activities.length} รายการ</p>`;
+            
+            let activeCount = 0;
+            let upcomingCount = 0;
+            let completedCount = 0;
+            
+            activities.forEach(activity => {
+                const [startHours, startMinutes] = activity.startTime.split(':').map(Number);
+                const [endHours, endMinutes] = activity.endTime.split(':').map(Number);
+                
+                const startTimeMinutes = startHours * 60 + startMinutes;
+                const endTimeMinutes = endHours * 60 + endMinutes;
+                
+                let status = 'upcoming';
+                if (currentTime >= startTimeMinutes && currentTime <= endTimeMinutes) {
+                    status = 'active';
+                    activeCount++;
+                } else if (currentTime < startTimeMinutes) {
+                    status = 'upcoming';
+                    upcomingCount++;
+                } else {
+                    status = 'completed';
+                    completedCount++;
+                }
+                
+                html += `
+                    <div class="activity-item">
+                        <strong>${activity.name}</strong>
+                        <span class="status ${status}">${status}</span>
+                        <br>
+                        <small>${activity.startTime} - ${activity.endTime}</small>
+                    </div>
+                `;
+            });
+            
+            html += `
+                <div style="margin-top: 20px; padding: 10px; background: #e9ecef; border-radius: 5px;">
+                    <strong>สถิติ:</strong><br>
+                    🟢 กำลังดำเนินการ: ${activeCount}<br>
+                    🟡 กำลังจะเริ่ม: ${upcomingCount}<br>
+                    🔵 เสร็จสิ้นแล้ว: ${completedCount}
+                </div>
+            `;
+            
+            document.getElementById('activities-test').innerHTML = html;
+            
+            log(`✅ ทดสอบกิจกรรมสำเร็จ - Active: ${activeCount}, Upcoming: ${upcomingCount}, Completed: ${completedCount}`);
+        }
+        
+        async function runTests() {
+            log('🚀 เริ่มการทดสอบ...');
+            updateStatus('กำลังทดสอบ...', 'info');
+            
+            const config = await testConfigLoading();
+            
+            if (config) {
+                testActivities(config);
+                updateStatus('ทดสอบเสร็จสมบูรณ์', 'success');
+            } else {
+                updateStatus('ทดสอบล้มเหลว', 'error');
+            }
+            
+            log('🏁 ทดสอบเสร็จสิ้น');
+        }
+        
+        // เริ่มทดสอบเมื่อหน้าโหลดเสร็จ
+        document.addEventListener('DOMContentLoaded', runTests);
+    </script>
+</body>
+</html>
