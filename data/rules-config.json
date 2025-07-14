@@ -18,6 +18,7 @@
     "server-country-rules.json",
     "twitter-rules.json",
     "id-card-image-rules.json",
+    "account-suspension-rules.json",
     "robbery-rules.json",
     "summon-evidence-rules.json",
     "evidence-submission-rules.json",
