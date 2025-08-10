@@ -508,22 +508,24 @@
 
                 // Render top navbar
                 const navbarLinks = document.getElementById('navbar-links');
-                const topRules = visibleRules.slice(0, 4); // แสดง 4 กฎแรก
-                
-                // เพิ่มลิงก์เวลากิจกรรม
-                let navbarHTML = `<a href="schedule.html" class="text-gray-600 hover:text-yellow-600 transition-colors flex items-center">
-                    <i class="fas fa-clock mr-2"></i>เวลากิจกรรม
-                </a>`;
-                
-                navbarHTML += topRules.map(ruleId => {
-                    const ruleData = this.rulesData[ruleId];
-                    const visibilityData = this.visibilityConfig?.rulesVisibility?.[ruleId];
-                    const title = visibilityData?.title || ruleData?.title || ruleId;
+                if (navbarLinks) {
+                    const topRules = visibleRules.slice(0, 4); // แสดง 4 กฎแรก
                     
-                    return `<a href="#${ruleId}" class="text-gray-600 hover:text-yellow-600 transition-colors">${title}</a>`;
-                }).join('');
-                
-                navbarLinks.innerHTML = navbarHTML;
+                    // เพิ่มลิงก์เวลากิจกรรม
+                    let navbarHTML = `<a href="schedule.html" class="text-gray-600 hover:text-yellow-600 transition-colors flex items-center">
+                        <i class="fas fa-clock mr-2"></i>เวลากิจกรรม
+                    </a>`;
+                    
+                    navbarHTML += topRules.map(ruleId => {
+                        const ruleData = this.rulesData[ruleId];
+                        const visibilityData = this.visibilityConfig?.rulesVisibility?.[ruleId];
+                        const title = visibilityData?.title || ruleData?.title || ruleId;
+                        
+                        return `<a href="#${ruleId}" class="text-gray-600 hover:text-yellow-600 transition-colors">${title}</a>`;
+                    }).join('');
+                    
+                    navbarLinks.innerHTML = navbarHTML;
+                }
             }
 
             groupRulesByCategory(ruleIds) {
